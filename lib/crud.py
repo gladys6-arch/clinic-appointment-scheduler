@@ -9,3 +9,9 @@ def add_patient(name, age, gender, contact):
     session.commit()
     session.close()
     return patient
+
+def get_patients_list():
+    session = SessionLocal()
+    patients = session.query(Patient).all()
+    session.close()
+    return [(p.id, p.name, p.age, p.gender, p.contact) for p in patients]
