@@ -15,3 +15,19 @@ def get_patients_list():
     patients = session.query(Patient).all()
     session.close()
     return [(p.id, p.name, p.age, p.gender, p.contact) for p in patients]
+
+
+
+def get_patients_dict():
+    session = SessionLocal()
+    patients = session.query(Patient).all()
+    session.close()
+    return {p.id: p.name for p in patients}
+
+def add_doctor(name, specialty, phone):
+    session = SessionLocal()
+    doctor = Doctor(name=name, specialty=specialty, phone=phone)
+    session.add(doctor)
+    session.commit()
+    session.close()
+    return doctor
