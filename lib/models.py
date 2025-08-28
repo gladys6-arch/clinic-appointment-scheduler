@@ -21,3 +21,16 @@ class Doctor(Base):
     hire_date = Column(Date, default=date.today)
     phone = Column(String)
     appointments = relationship("Appointment", back_populates="doctor")
+
+
+class Appointment(Base):
+    __tablename__ = "appointments"
+    id = Column(Integer, primary_key=True, autoincrement=True)
+    patient_id = Column(Integer, ForeignKey("patients.id"))
+    doctor_id = Column(Integer, ForeignKey("doctors.id"))
+    appointment_date = Column(Date, nullable=False)
+    reason = Column(String)
+    status = Column(String, default="Scheduled")
+
+    patient = relationship("Patient", back_populates="appointments")
+    doctor = relationship("Doctor", back_populates="appointments")
