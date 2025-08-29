@@ -1,11 +1,8 @@
-
-
-from lib.crud import (
-  add_patient, get_patients_list, 
+from .crud import (
+    add_patient, get_patients_list,
     add_doctor, get_doctors_list,
     schedule_appointment, get_appointments_list
 )
-
 from datetime import datetime
 
 def main_menu():
@@ -21,8 +18,7 @@ def main_menu():
 
         choice = input("Select an option: ").strip()
 
-
-    if choice == "1":
+        if choice == "1":
             name = input("Patient Name: ")
             age = int(input("Patient Age: "))
             gender = input("Patient Gender: ")
@@ -30,42 +26,56 @@ def main_menu():
             add_patient(name, age, gender, contact)
             print("Patient added successfully!")
 
-    elif choice == "2":
+        elif choice == "2":
             patients = get_patients_list()
             print("\nPatients:")
             for p in patients:
                 print(p)
 
+        elif choice == "3":
+            name = input("Doctor Name: ")
+            specialty = input("Specialty: ")
+            phone = input("Phone Number: ")
+            add_doctor(name, specialty, phone)
+            print("Doctor added successfully!")
 
+        elif choice == "4":
+            doctors = get_doctors_list()
+            print("\nDoctors:")
+            for d in doctors:
+                print(d)
 
+        elif choice == "5":
+            patient_id = int(input("Patient ID: "))
+            doctor_id = int(input("Doctor ID: "))
+            date = input("Appointment Date (YYYY-MM-DD): ")
+            reason = input("Reason: ")
+            schedule_appointment(patient_id, doctor_id, date, reason)
+            print("Appointment scheduled!")
 
-#Appointments
-@click.command()
-@click.option("--patient_id", prompt="Patient ID", type=int)
-@click.option("--doctor_id", prompt="Doctor ID", type=int)
-@click.option("--date", prompt="Appointment Date (YYYY-MM-DD)")
-@click.option("--reason", prompt="Reason for appointment")
-def create_appointment(patient_id, doctor_id, date, reason):
-    schedule_appointment(patient_id, doctor_id, date, reason)
-    click.echo("Appointment scheduled!")
+        elif choice == "6":
+            appointments = get_appointments_list()
+            print("\nAppointments:")
+            for a in appointments:
+                print(a)
 
-@click.command()
-def list_appointments():
-    appointments = get_appointments_list()
-    click.echo("Appointments:")
-    for a in appointments:
-        click.echo(a)
+        elif choice == "0":
+            print("Exiting...")
+            break
 
-
-# Add commands to CLI
-cli.add_command(create_patient)
-cli.add_command(list_patients)
-cli.add_command(create_doctor)
-cli.add_command(list_doctors)
-cli.add_command(create_appointment)
-cli.add_command(list_appointments)
+        else:
+            print("Invalid option. Please try again.")
 
 if __name__ == "__main__":
-    cli()
+    main_menu()
+
+
+
+
+
+
+
+
+
 
 
