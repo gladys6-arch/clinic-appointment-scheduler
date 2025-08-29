@@ -1,6 +1,7 @@
 from .database import SessionLocal
 from .models import Patient, Doctor, Appointment
 from datetime import datetime
+from sqlalchemy.orm import joinedload
 
 def add_patient(name, age, gender, contact):
     session = SessionLocal()
@@ -55,13 +56,23 @@ def schedule_appointment(patient_id, doctor_id, date_str, reason):
 
 def get_appointments_list():
     session = SessionLocal()
-    appointments = session.query(Appointment).all()
+    appointments = session.query(Appointment)\
+        .options(joinedload(Appointment.patient), joinedload(Appointment.doctor))\
+        .all()
+
+    result = []
+    for a in appointments:
+        patient_name = a.patient.name if a.patient else "Unknown Patient"
+        doctor_name = a.doctor.name if a.doctor else "Unknown Doctor"
+
+        result.append({
+            "id": a.id,
+            "patient": patient_name,
+            "doctor": doctor_name,
+            "date": a.appointment_date,
+            "reason": a.reason,
+            "status": a.status
+        })
+
     session.close()
-    return [{
-        "id": a.id,
-        "patient": a.patient.name,
-        "doctor": a.doctor.name,
-        "date": a.appointment_date,
-        "reason": a.reason,
-        "status": a.status
-    } for a in appointments]
+    return result
