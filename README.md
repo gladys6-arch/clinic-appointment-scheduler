@@ -67,6 +67,27 @@ alembic upgrade head
 
 ```
 
+## 3. Running the Project
+Run the CLI using:
+
+```
+python run.py
+
+```
+
+You will see a menu like this:
+
+=== Clinic Appointment Scheduler ===
+1. Create Patient
+2. List Patients
+3. Create Doctor
+4. List Doctors
+5. Schedule Appointment
+6. List Appointments
+0. Exit
+Select an option:
+
+
 ## LICENSE
 
 MIT License
