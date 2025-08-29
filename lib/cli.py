@@ -48,3 +48,22 @@ def list_doctors():
     click.echo("Doctors:")
     for d in doctors:
         click.echo(f"{d}")
+
+#Appointments
+@click.command()
+@click.option("--patient_id", prompt="Patient ID", type=int)
+@click.option("--doctor_id", prompt="Doctor ID", type=int)
+@click.option("--date", prompt="Appointment Date (YYYY-MM-DD)")
+@click.option("--reason", prompt="Reason for appointment")
+def create_appointment(patient_id, doctor_id, date, reason):
+    schedule_appointment(patient_id, doctor_id, date, reason)
+    click.echo("Appointment scheduled!")
+
+@click.command()
+def list_appointments():
+    appointments = get_appointments_list()
+    click.echo("Appointments:")
+    for a in appointments:
+        click.echo(a)
+
+        
