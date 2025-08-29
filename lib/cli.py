@@ -11,3 +11,23 @@ def cli():
   """Clinic Appointment Scheduler CLI"""
   pass
 
+
+#patients
+@click.command()
+@click.option("--name", prompt="Patient Name")
+@click.option("--age", prompt="Patient Age", type=int)
+@click.option("--gender", prompt="Patient Gender")
+@click.option("--contact", prompt="Patient Contact")
+def create_patient(name, age, gender, contact):
+    if age <= 0:
+        click.echo("Error: Age must be positive")
+        return
+    add_patient(name, age, gender, contact)
+    click.echo("Patient added successfully!")
+
+@click.command()
+def list_patients():
+    patients = get_patients_list()
+    click.echo("Patients:")
+    for p in patients:
+        click.echo(f"{p}")
