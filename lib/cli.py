@@ -67,7 +67,7 @@ def list_appointments():
         click.echo(a)
 
 
-  # Add commands to CLI
+# Add commands to CLI
 cli.add_command(create_patient)
 cli.add_command(list_patients)
 cli.add_command(create_doctor)
@@ -77,5 +77,5 @@ cli.add_command(list_appointments)
 
 if __name__ == "__main__":
     cli()
-    
-        
+
+
