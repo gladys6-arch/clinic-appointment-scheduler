@@ -10,7 +10,9 @@ It uses:
 
 With this app, you can:
 ✔️ Add and view patients
+
 ✔️ Add and  view doctors
+
 ✔️ Schedule and view appointments
 
 
@@ -26,6 +28,44 @@ git clone https://github.com/yourusername/clinic-appointment-scheduler.git
 cd clinic-appointment-scheduler
 
 ```
+
+### 2. Create and Activate a Virtual Environment
+
+On Linux/macOS
+
+```
+python3 -m venv clinic-env
+
+```
+
+```
+clinic-env\Scripts\activate
+
+```
+
+### 3. Install Dependencies
+If using pip:
+
+```
+pip install -r requirements.txt
+
+```
+
+or manually install:
+
+```
+pip install sqlalchemy alembic click tabulate
+
+```
+
+### 4. Initialize the Database
+Run Alembic migrations to set up the database tables:
+
+```
+alembic upgrade head
+
+```
+
 
 
 
