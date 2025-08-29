@@ -87,6 +87,29 @@ You will see a menu like this:
 0. Exit
 Select an option:
 
+- Each option corresponds to a function in the project:
+
+- Create Patient → Adds a new patient
+
+- List Patients → Displays all patients
+
+- Create Doctor → Adds a new doctor
+
+- List Doctors → Displays all doctors
+
+- Schedule Appointment → Assigns a patient to a doctor with a  date & reason
+
+- List Appointments → Shows all scheduled appointments
+
+- Exit → Closes the program
+
+
+## ✅ Requirements
+
+- Python 3.8+
+- SQLAlchemy
+- Alembic
+
 
 ## LICENSE
 
