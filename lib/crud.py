@@ -51,3 +51,17 @@ def schedule_appointment(patient_id, doctor_id, date_str, reason):
     session.commit()
     session.close()
     return appointment
+
+
+def get_appointments_list():
+    session = SessionLocal()
+    appointments = session.query(Appointment).all()
+    session.close()
+    return [{
+        "id": a.id,
+        "patient": a.patient.name,
+        "doctor": a.doctor.name,
+        "date": a.appointment_date,
+        "reason": a.reason,
+        "status": a.status
+    } for a in appointments]
