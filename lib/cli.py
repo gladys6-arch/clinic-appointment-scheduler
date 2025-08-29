@@ -31,3 +31,20 @@ def list_patients():
     click.echo("Patients:")
     for p in patients:
         click.echo(f"{p}")
+
+
+#doctors
+@click.command()
+@click.option("--name", prompt="Doctor Name")
+@click.option("--specialty", prompt="Specialty")
+@click.option("--phone", prompt="Phone Number")
+def create_doctor(name, specialty, phone):
+    add_doctor(name, specialty, phone)
+    click.echo("Doctor added successfully!")
+
+@click.command()
+def list_doctors():
+    doctors = get_doctors_list()
+    click.echo("Doctors:")
+    for d in doctors:
+        click.echo(f"{d}")
