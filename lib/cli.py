@@ -1,53 +1,43 @@
-import click
+
 
 from lib.crud import (
-  add_patient, get_patients_list, get_patients_dict,
+  add_patient, get_patients_list, 
     add_doctor, get_doctors_list,
     schedule_appointment, get_appointments_list
 )
 
-@click.group()
-def cli():
-  """Clinic Appointment Scheduler CLI"""
-  pass
+from datetime import datetime
+
+def main_menu():
+    while True:
+        print("\n=== Clinic Appointment Scheduler ===")
+        print("1. Create Patient")
+        print("2. List Patients")
+        print("3. Create Doctor")
+        print("4. List Doctors")
+        print("5. Schedule Appointment")
+        print("6. List Appointments")
+        print("0. Exit")
+
+        choice = input("Select an option: ").strip()
 
 
-#patients
-@click.command()
-@click.option("--name", prompt="Patient Name")
-@click.option("--age", prompt="Patient Age", type=int)
-@click.option("--gender", prompt="Patient Gender")
-@click.option("--contact", prompt="Patient Contact")
-def create_patient(name, age, gender, contact):
-    if age <= 0:
-        click.echo("Error: Age must be positive")
-        return
-    add_patient(name, age, gender, contact)
-    click.echo("Patient added successfully!")
+    if choice == "1":
+            name = input("Patient Name: ")
+            age = int(input("Patient Age: "))
+            gender = input("Patient Gender: ")
+            contact = input("Patient Contact: ")
+            add_patient(name, age, gender, contact)
+            print("Patient added successfully!")
 
-@click.command()
-def list_patients():
-    patients = get_patients_list()
-    click.echo("Patients:")
-    for p in patients:
-        click.echo(f"{p}")
+    elif choice == "2":
+            patients = get_patients_list()
+            print("\nPatients:")
+            for p in patients:
+                print(p)
 
 
-#doctors
-@click.command()
-@click.option("--name", prompt="Doctor Name")
-@click.option("--specialty", prompt="Specialty")
-@click.option("--phone", prompt="Phone Number")
-def create_doctor(name, specialty, phone):
-    add_doctor(name, specialty, phone)
-    click.echo("Doctor added successfully!")
 
-@click.command()
-def list_doctors():
-    doctors = get_doctors_list()
-    click.echo("Doctors:")
-    for d in doctors:
-        click.echo(f"{d}")
 
 #Appointments
 @click.command()
