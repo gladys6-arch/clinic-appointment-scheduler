@@ -87,7 +87,8 @@ You will see a menu like this:
 0. Exit
 Select an option:
 
-- Each option corresponds to a function in the project:
+
+ Each option corresponds to a function in the project:
 
 - Create Patient → Adds a new patient
 
@@ -109,6 +110,7 @@ Select an option:
 - Python 3.8+
 - SQLAlchemy
 - Alembic
+
 
 
 ## LICENSE
