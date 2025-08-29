@@ -31,3 +31,23 @@ def add_doctor(name, specialty, phone):
     session.commit()
     session.close()
     return doctor
+
+def get_doctors_list():
+    session = SessionLocal()
+    doctors = session.query(Doctor).all()
+    session.close()
+    return [(d.id, d.name, d.specialty, d.phone) for d in doctors]
+
+def schedule_appointment(patient_id, doctor_id, date_str, reason):
+    session = SessionLocal()
+    date_obj = datetime.strptime(date_str, "%Y-%m-%d").date()
+    appointment = Appointment(
+        patient_id=patient_id,
+        doctor_id=doctor_id,
+        appointment_date=date_obj,
+        reason=reason
+    )
+    session.add(appointment)
+    session.commit()
+    session.close()
+    return appointment
